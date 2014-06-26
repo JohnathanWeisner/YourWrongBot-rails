@@ -14,5 +14,4 @@ test:
 production:
   <<: *default
   database: YourWrongBot-rails_production
-  username: YourWrongBot-rails
   password: <%= ENV['YOURWRONGBOT-RAILS_DATABASE_PASSWORD'] %>

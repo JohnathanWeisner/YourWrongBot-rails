@@ -19,5 +19,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'jasmine-rails'
 end
+gem 'rails_12factor', group: :production
 
 
