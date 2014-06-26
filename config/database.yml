@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: YourWrongBot-rails_development
+
+test:
+  <<: *default
+  database: YourWrongBot-rails_test
+
+production:
+  <<: *default
+  database: YourWrongBot-rails_production
+  username: YourWrongBot-rails
+  password: <%= ENV['YOURWRONGBOT-RAILS_DATABASE_PASSWORD'] %>

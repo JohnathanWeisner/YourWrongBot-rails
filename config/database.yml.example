@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+  pool: 5
+
+development:
+  <<: *default
+  database: your-wrong-bot_development
+
+test:
+  <<: *default
+  database: your-wrong-bot_test
+
+
+production:
+  <<: *default
+  database: your-wrong-bot_production
+  username: your-wrong-bot
+  password: <%= ENV['YOUR-WRONG-BOT_DATABASE_PASSWORD'] %>
