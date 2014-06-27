@@ -17,8 +17,12 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
+  gem 'capybara'
   gem 'jasmine-rails'
+  gem 'factory_girl_rails', "~> 4.0"
+  gem 'webmock'
 end
+
 gem 'rails_12factor', group: :production
 
 
