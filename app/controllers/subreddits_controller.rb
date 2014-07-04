@@ -1,4 +1,4 @@
-# class SubredditsController < ApplicationController
-#   def index
-#   end
-# end
+class SubredditsController < ApplicationController
+  def index
+  end
+end

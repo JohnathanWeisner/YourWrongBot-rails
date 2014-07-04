@@ -6,15 +6,27 @@ class RedditParser
   def initialize
     @reddit = Snoo::Client.new
     @subreddit = "gaming"
+    @last_api_call_time = Time.now
+    @delay_since_last_api_call = 2
   end
 
+  def delay
+    @delay_since_last_api_call = Time.now - @last_api_call_time
+    sleep 2 - @delay_since_last_api_call if @delay_since_last_api_call < 2
+    @last_api_call_time = Time.now
+  end
+  
   def link_ids
-    (@reddit.get_listing subreddit: subreddit)["data"]["children"]
+    ids = (@reddit.get_listing subreddit: subreddit)["data"]["children"]
       .map{ |link| link["data"]["id"] }
+    delay
+    ids
   end
 
   def get_post link_id
-    @reddit.get_comments link_id: link_id, limit: 1000
+    post = @reddit.get_comments link_id: link_id, limit: 1000
+    delay
+    post
   end
 
   def comments_from post
@@ -40,6 +52,12 @@ class RedditParser
       end
     end
     all_comments
+  end
+
+  def all_comments_flattened
+    link_ids.map do |link_id| 
+      flatten_threaded_comments comments_from get_post link_id
+    end.flatten
   end
 end
 
