@@ -12,10 +12,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'snoo'
 gem 'gingerice'
 gem 'unicorn'
+gem 'chartkick'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :development, :test do
-  gem 'spring'
+  # gem 'spring'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'jasmine-rails'

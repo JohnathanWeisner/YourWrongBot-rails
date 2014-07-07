@@ -17,13 +17,19 @@ ActiveRecord::Schema.define(version: 20140704000553) do
   enable_extension "plpgsql"
 
   create_table "comments", force: true do |t|
+    t.string   "body"
     t.string   "comment_id"
+    t.string   "retort"
+    t.string   "reply_status"
     t.datetime "commented_on"
     t.integer  "subreddit_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "comments", ["comment_id"], name: "index_comments_on_comment_id", using: :btree
   add_index "comments", ["commented_on"], name: "index_comments_on_commented_on", using: :btree
+  add_index "comments", ["reply_status"], name: "index_comments_on_reply_status", using: :btree
   add_index "comments", ["subreddit_id"], name: "index_comments_on_subreddit_id", using: :btree
 
   create_table "grammar_mistakes", force: true do |t|
