@@ -1,4 +1,5 @@
 require 'snoo'
+require 'json'
 require 'reddit_parser'
 require 'grammar_checker'
 
@@ -6,11 +7,17 @@ class YourWrongBot
 
   def self.run
     init
-    all_comments = @parser.all_comments_flattened
     @subreddits.each do |subreddit|
-      subreddit_id = Subreddit.where(name: subreddit).first_or_create!.id
-      all_comments.map do |comment|
-        process_comment comment
+      @parser.subreddit = subreddit
+      all_comments = @parser.all_comments_flattened
+      @subreddit_id = Subreddit.where(name: subreddit).first_or_create!.id
+      comment_ids = all_comments.map{|comment| comment[:id] }
+      all_ready_processed_ids = Comment.where("comment_id in (?)", comment_ids).pluck(:comment_id)
+
+      all_comments.each do |comment|
+        unless all_ready_processed_ids.include? comment[:id]
+          process_comment comment
+        end
       end
     end
   end
@@ -18,9 +25,9 @@ class YourWrongBot
   # private
 
   def self.init
-    @client = Snoo::Client.new
+    @client = Snoo::Client.new(useragent: "YourWrongBot - Grammar correcting bot")
     @client.log_in ENV['REDDIT_USERNAME'], ENV['REDDIT_PASSWORD']
-    @subreddits = ENV['SUBREDDITS']
+    @subreddits = ENV['SUBREDDITS'].split(",")
     @parser = RedditParser.new
     @grammar_checker = GrammarChecker.new
   end
@@ -33,16 +40,16 @@ class YourWrongBot
       else
         reply_status = "never"
       end
-      store_comment snootified_comment
+      store_comment snootified_comment, reply_status
     end
   end
 
-  def self.store_comment comment
+  def self.store_comment comment, reply_status
     db_comment = Comment.where(comment_id: comment[:id]).first_or_initialize({ 
       commented_on: comment[:comment_on],
       reply_status: reply_status,
       retort: comment[:corrected],
-      subreddit_id: subreddit_id,
+      subreddit_id: @subreddit_id,
       body: comment[:body]
     })
 
@@ -50,9 +57,18 @@ class YourWrongBot
   end
 
   def self.reply_to_next_comment
-    comment = Comment.where(reply_comment: "soon").first
-    response = @client.comment comment.retort, comment.comment_id
-    puts response
+    init
+    comment = Comment.where(reply_status: "soon").first
+    if comment
+      sleep(2)
+      response = @client.comment(format_reply(comment.retort), "t1_#{comment.comment_id}")
+      comment.update(reply_status: 'commented')
+      puts JSON.pretty_generate response['json']
+    end
+  end
+
+  def self.format_reply comment
+    "*Ehem.*\n\nI do believe **you're** mistaken.>#{comment.gsub("\n\n","\n\n>")}\n\n**I am a bot.^Please message me I'm mistaken.**"
   end
 
 end

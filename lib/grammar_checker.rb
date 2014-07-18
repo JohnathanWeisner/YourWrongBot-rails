@@ -2,10 +2,6 @@ require 'gingerice'
 
 class GrammarChecker
 
-  def initialize
-    @responses = ["Excuse me, but I think you made a mistake there", "Ehem", "...", "FTFY"]
-  end
-
   def contains?(words, comment)
     !!(/#{words.join("|")}/.match(comment[:body]))
   end
@@ -24,7 +20,6 @@ class GrammarChecker
     comment[:grammar_fails].each do |error|
       if contains?(["your","you're","you are"], body: error["text"]) && 
         different_your?(error["text"],error["correct"])
-
         return true
       end
     end
@@ -34,11 +29,16 @@ class GrammarChecker
   def snootify(comment)
     start = Time.now
     puts "snootify start"
-    results = Gingerice::Parser.new.parse(comment[:body])
-    comment[:grammar_fails] = results["corrections"]
-    comment[:corrected] = "#{@responses.sample} \n\n>#{results['result']}"
-    puts "snootify finished #{Time.now - start}"
-    comment
+    begin
+      results = Gingerice::Parser.new.parse(comment[:body])
+      comment[:grammar_fails] = results["corrections"]
+      comment[:corrected] = results['result']
+      puts "snootify finished #{Time.now - start}"
+      comment
+    rescue
+      sleep(1)
+      snootify comment
+    end
   end
 
 end

@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 20140704000553) do
   enable_extension "plpgsql"
 
   create_table "comments", force: true do |t|
-    t.string   "body"
+    t.text     "body"
     t.string   "comment_id"
-    t.string   "retort"
+    t.text     "retort"
     t.string   "reply_status"
     t.datetime "commented_on"
     t.integer  "subreddit_id"
