@@ -1,6 +1,13 @@
+
+
+<%= 
+  column_chart @todays_percentage_graph_data, 
+  id: "Mistaken 'Your', 'You're', or 'You are' percentage", 
+  library: {hAxis: {title: "Subreddits"}, vAxis: {title: "Percent Wrong"}}
+%>
+
 <%= 
   column_chart @todays_graph_data, 
-  id: "Mistaken 'Your', 'You're', or 'You are'", 
-  stacked: true,
-  library: {hAxis: {title: "Subreddits"}, vAxis: {title: "Percent Wrong"}}
+  id: "Mistaken 'Your', 'You're', or 'You are' count", 
+  library: {hAxis: {title: "Subreddits"}, vAxis: {title: "Total Wrong"}}
 %>
