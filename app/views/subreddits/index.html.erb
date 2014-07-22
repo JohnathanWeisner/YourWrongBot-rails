@@ -1,1 +1,5 @@
-<%= bar_chart Comment.joins(:subreddit).group(:name).where( "commented_on >= ?", Time.zone.now.beginning_of_day).where("reply_status != 'never'").count, id: "Mistaken 'Your', 'You're', or 'You are'", stacked: true %>
+<%= 
+  bar_chart @todays_graph_data, 
+  id: "Mistaken 'Your', 'You're', or 'You are'", 
+  stacked: true 
+%>
