@@ -1,5 +1,6 @@
+
 desc "This task is called by the Heroku scheduler add-on"
-task :update_feed => :environment do
+task :scrape_comments => :environment do
   puts "Grabbing comments."
   YourWrongBot.run
   YourWrongBot.reply
