@@ -56,7 +56,7 @@ class YourWrongBot
     db_comment.save if db_comment.new_record?
   end
 
-  def self.reply_to_next_comment
+  def self.reply
     init
     comments = Comment.where(reply_status: "soon")
     puts "Comments to post: #{comments.count}"
