@@ -69,7 +69,7 @@ class YourWrongBot
         else
           puts response['json']["ratelimit"]
           sleep(response['json']["ratelimit"])
-          self.reply_to_next_comment
+          self.reply
         end
       end
     end
