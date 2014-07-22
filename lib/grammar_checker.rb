@@ -1,4 +1,5 @@
 require 'gingerice'
+require 'json'
 
 class GrammarChecker
 
@@ -36,8 +37,9 @@ class GrammarChecker
       puts "snootify finished #{Time.now - start}"
       comment
     rescue
-      sleep(1)
-      snootify comment
+      comment[:grammar_fails] = {}
+      comment[:corrected] = "Failed"
+      comment
     end
   end
 
