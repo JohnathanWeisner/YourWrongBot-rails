@@ -12,17 +12,30 @@ class YourWrongBot
       all_comments = @parser.all_comments_flattened
       @subreddit_id = Subreddit.where(name: subreddit).first_or_create!.id
       comment_ids = all_comments.map{|comment| comment[:id] }
-      all_ready_processed_ids = Comment.where("comment_id in (?)", comment_ids).pluck(:comment_id)
+      processed_ids = Comment.where("comment_id in (?)", comment_ids).pluck(:comment_id)
 
       all_comments.each do |comment|
-        unless all_ready_processed_ids.include? comment[:id]
-          process_comment comment
-        end
+        process_comment comment unless processed_ids.include? comment[:id]
       end
     end
   end
 
-  # private
+  def self.reply
+    init
+    comment = Comment.where(reply_status: "soon").first
+    if comment
+      response = @client.comment(format_reply(comment.retort), "t1_#{comment.comment_id}")
+      unless response_invalid? response
+        comment.update(reply_status: 'commented')
+      else
+        puts response['json']["ratelimit"]
+        sleep(response['json']["ratelimit"])
+        self.reply
+      end
+    end
+  end
+
+  private
 
   def self.init
     @client = Snoo::Client.new(useragent: "Hello_I_Grammared_It - Grammar correcting bot")
@@ -56,23 +69,12 @@ class YourWrongBot
     db_comment.save if db_comment.new_record?
   end
 
-  def self.reply
-    init
-    comments = Comment.where(reply_status: "soon")
-    puts "Comments to post: #{comments.count}"
-    comments.each do |comment|
-      if comment
-        sleep(2)
-        response = @client.comment(format_reply(comment.retort), "t1_#{comment.comment_id}")
-        unless response['json'] && response['json'].is_a?(Hash) && response['json']["ratelimit"] && response['json']["ratelimit"] > 0
-          comment.update(reply_status: 'commented')
-        else
-          puts response['json']["ratelimit"]
-          sleep(response['json']["ratelimit"])
-          self.reply
-        end
-      end
-    end
+
+  def self.response_invalid? response
+    (response['json'] && 
+      response['json'].is_a?(Hash) && 
+      response['json']["ratelimit"] && 
+      response['json']["ratelimit"] > 0)
   end
 
   def self.beginning
