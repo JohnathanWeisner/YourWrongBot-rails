@@ -21,11 +21,11 @@ class YourWrongBot
   end
 
   def self.reply
-    comment = Comment.where(reply_status: "soon").first
+    comment = Comment.next_reply
     if comment
       init
       response = @client.comment(format_reply(comment.retort), "t1_#{comment.comment_id}")
-      comment.update(reply_status: 'commented') unless response_invalid? response
+      comment.commented unless response_invalid? response
     end
   end
 
