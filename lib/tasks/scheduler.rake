@@ -10,8 +10,8 @@ task :scrape_comments => :environment do
 end
 
 desc "This task is called by the Heroku scheduler add-on"
-task :send_replies => :environment do
-  puts "Sending replies."
-  3.times { YourWrongBot.reply }
+task :send_reply => :environment do
+  puts "Sending reply"
+  YourWrongBot.reply
   puts "Finished"
 end

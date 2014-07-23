@@ -21,17 +21,11 @@ class YourWrongBot
   end
 
   def self.reply
-    init
     comment = Comment.where(reply_status: "soon").first
     if comment
+      init
       response = @client.comment(format_reply(comment.retort), "t1_#{comment.comment_id}")
-      unless response_invalid? response
-        comment.update(reply_status: 'commented')
-      else
-        puts response['json']["ratelimit"]
-        sleep(response['json']["ratelimit"])
-        self.reply
-      end
+      comment.update(reply_status: 'commented') unless response_invalid? response
     end
   end
 
