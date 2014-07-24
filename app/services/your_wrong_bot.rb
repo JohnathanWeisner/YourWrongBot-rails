@@ -81,7 +81,7 @@ class YourWrongBot
   end
 
   def self.format_reply comment
-    "#{beginning}\n\n>#{comment.gsub("\n\n","\n\n>")}\n\n Have a lovely day!"
+    "#{beginning}\n\n>#{comment.gsub("\n\n","\n\n>")}\n\n Have a lovely day! [bot](http://www.yourwrongbot.com)"
   end
 
 end

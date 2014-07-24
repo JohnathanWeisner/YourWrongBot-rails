@@ -1,5 +1,4 @@
 class SubredditsController < ApplicationController
-  before_filter :todays_graph_data,:current_subreddits
 
   def index
     @todays_graph_data = Comment.todays_graph_data
@@ -18,10 +17,3 @@ class SubredditsController < ApplicationController
   end
 end
 
-def current_subreddits
-  @subreddits = Subreddit.where(name: @todays_graph_data.keys)
-end
-
-def todays_graph_data
-  @todays_graph_data = Comment.todays_graph_data
-end

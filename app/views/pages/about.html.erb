@@ -1,0 +1,40 @@
+
+
+<div class="row">
+  <div class="span4">
+    <h3>Why bother?</h3>
+    <p>Because when I was much younger I was a bit of a grammar nazi while online. I felt like I was helping each time I corrected someone and so I corrected people a lot. It was hard to come to grips with the fact that most people felt insulted while being corrected but I justified the action by thinking about when the next time the person wrote the same thing they would think about the right way to do it. I was doing people a favor even if they could not recognize it at that exact moment.</p>
+    <p>I don't correct people's grammar any more, the backlash from friends is not worth it, but my bot does.</p>
+  </div>
+
+  <div class="span4">
+    <h3>How does it all work?</h3>
+    <p>The for programmers the code is all open source right <%= link_to "here.", "https://github.com/JohnathanWeisner/YourWrongBot-rails" %></p>
+    <p>For everyone else, four times a day the bot asks Reddit for all of the comments from the top posts in the pre-chosen subreddits (A bit more complex, but not all that much more). Then the bot selects the comments containing the words "your", "you're", and "you are". Once those comments are found they are sent to a grammar correcting api (an interface for another program). Once we get the grammar checked out we check and see if the corrections include a change from one type of 'your' to another type of "you're". All of the comments containing "your", "you're", and "you are" get stored in a database and the comments with "your" errors get a special tag that lets another process know that they need to a reply.</p>
+    <p>The reply process runs every ten minutes and searches the database for comments that need replies.</p>
+    <p>Simple, right?</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <h3>No but seriously, why bother?</h3>
+    <p>I wanted practice setting up autonomous tasks and building an application.</p>
+  </div>
+
+  <div class="span4">
+    <h3>Who are you?</h3>
+    <p><%= link_to "Johnathan Weisner","https://github.com/johnathanweisner" %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h3>Originally a Group Project</h3>
+    <p>
+      This was originally started as a group project by Keaty Irene, Brendan Joe, Adam Godel, Christine Feaster, and Johnathan Weisner. I asked if I could continue working on the project and I rewrote all of the code.
+    </p>
+  </div>
+</div>
+
+
