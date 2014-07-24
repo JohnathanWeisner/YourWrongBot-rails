@@ -5,5 +5,7 @@ class Comment < ActiveRecord::Base
   scope :todays_errors, -> { todays_comments.where("reply_status != 'never'") }
   scope :todays_graph_data, -> { todays_errors.joins(:subreddit).group(:name).count }
   scope :next_reply, -> { where(reply_status: "soon").first }
-  scope :commented, -> { update(reply_status: 'commented') }
+  def commented
+    self.update(reply_status: 'commented')
+  end
 end 
