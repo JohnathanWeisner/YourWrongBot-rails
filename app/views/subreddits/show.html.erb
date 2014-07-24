@@ -1,7 +1,7 @@
 <h4>/r/<%= @subreddit.name %></h4>
 <h5>Today's comments containing "your", "you're", or "you are"</h5>
-<p>Total comments: <%=@comments.count%></p>
-<p>Total errors: <%=@comments.todays_errors.count%></p>
+<p>Total comments: <%=@comments.count%><br>
+Total errors: <%=@comments.todays_errors.count%></p>
 <% if @comments %>
   <h5>Corrections done</h5>
   <% @comments.todays_errors.each_slice(2) do |first_comment,second_comment| %>
