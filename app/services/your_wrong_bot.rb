@@ -77,7 +77,7 @@ class YourWrongBot
      "Hello there. I try to help as many people as I can with the correct use cases of the words \"you're\", \"your\", or \"you are\". You're awesome so I figured I would help you out today. Here, I fixed what you wrote for you.",
      "'Ello there, matie. I realize a lot of people rush and don't pay attention while writing comments so this isn't that big a deal. I still feel compelled to fix your \"you're\", \"your\", or \"you are\" uses for you. Please do not take offense. Here you go!",
      "*Hugs* I love you for who you are and not the grammar you just used. I love you so much so that I retyped up what was written and fixed the use cases of \"you're\", \"your\", or \"you are\". I hope I cause no offense. Here you go!",
-     "Your comment is clearly constructive and I realize that typing quickly on Reddit while paying attention to grammar is not everyone's top priority, but I feel like the need to rewrite what was written with the correct \"you're\", \"your\", or \"you are\". I hope you don't mind."].sample
+     "Your comment is clearly constructive and I realize that typing quickly on Reddit while paying attention to grammar is not everyone's top priority, but I feel the need to rewrite what was written with the correct \"you're\", \"your\", or \"you are\". I hope you don't mind."].sample
   end
 
   def self.format_reply comment
