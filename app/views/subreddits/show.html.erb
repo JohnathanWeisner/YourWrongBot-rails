@@ -5,11 +5,11 @@
 <% if @comments %>
   <h5>Corrections done</h5>
   <% @comments.todays_errors.each do |comment| %>
-  <div class="well">
-    <span class="label label-warning">form</span>
-    <p><%=comment.body%></p>
+    <span class="label label-warning">from</span>
+    <div class="well">
+      <p><%=comment.body%></p>
+    </div>
     <span class="label label-success">to</span>
-    <p><%=comment.retort%></p><br>
-  </div>
+    <p><%=comment.retort%></p>
   <% end %>
 <% end %>
