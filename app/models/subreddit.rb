@@ -2,10 +2,10 @@ class Subreddit < ActiveRecord::Base
   has_many :comments
 
   def todays_comments
-    self.comments.where( "commented_on >= ?", Time.zone.now.beginning_of_day)
+    self.comments.todays_comments
   end
 
   def todays_errors
-    self.todays_comments.where("reply_status != 'never'")
+    self.todays_comments.todays_errors
   end
 end 

@@ -54,13 +54,13 @@
               <li><%= link_to "Hire Me", "/path2"  %></li>
               <li><%= link_to "Bot Stats", "/path3"  %></li>
             </ul>
-          </div><!--/.nav-collapse -->
+          </div>
         </div>
       </div>
     </div>
 
     <div class="container">
-        <div class="row">
+        <div class="row top-buffer">
           <div class="span9">
             <%= bootstrap_flash %>
             <%= yield %>
@@ -69,8 +69,10 @@
             <div class="well sidebar-nav">
               <h3>Subreddits</h3>
               <ul class="nav nav-list">
-                <li class="nav-header">Sidebar</li>
-                <li><%= link_to "Link1", "/path1"  %></li>
+                <li class="nav-header"><%= link_to "All", "/" %></li>
+                <% @subreddits.each do |subreddit| %>
+                  <li><%= link_to subreddit.name, "/subreddits/"+subreddit.name %></li>
+                <% end %>
               </ul>
             </div><!--/.well -->
           </div><!--/span-->

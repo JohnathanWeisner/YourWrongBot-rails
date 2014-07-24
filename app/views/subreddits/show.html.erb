@@ -1,0 +1,11 @@
+<h4>/r/<%= @subreddit.name %></h4>
+<h5>Today</h5>
+<p>Total Comments: <%=@comments.count%></p>
+<p>Total Your Errors: <%=@comments.todays_errors.count%></p>
+<% if @comments %>
+  <h5>Corrections Done</h5>
+  <% @comments.todays_errors.each do |comment| %>
+    <p><%=comment.body%></p>
+    <p><%=comment.retort%></p><br>
+  <% end %>
+<% end %>
