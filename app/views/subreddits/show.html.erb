@@ -1,11 +1,15 @@
 <h4>/r/<%= @subreddit.name %></h4>
-<h5>Today's comments containing "your", "you're", or "you are".</h5>
+<h5>Today's comments containing "your", "you're", or "you are"</h5>
 <p>Total comments: <%=@comments.count%></p>
 <p>Total errors: <%=@comments.todays_errors.count%></p>
 <% if @comments %>
   <h5>Corrections done</h5>
   <% @comments.todays_errors.each do |comment| %>
+  <div class="well">
+    <span class="label label-warning">form</span>
     <p><%=comment.body%></p>
+    <span class="label label-success">to</span>
     <p><%=comment.retort%></p><br>
+  </div>
   <% end %>
 <% end %>
