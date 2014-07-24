@@ -7,22 +7,17 @@
   <% @comments.todays_errors.each_slice(2) do |first_comment,second_comment| %>
     <div class="row-fluid">
       <div class="span6">
-        <p><span class="label label-warning">from</span><%=first_comment.body%></p>
+        <div class="row-fluid">
+          <p><span class="label label-warning">from</span><%=first_comment.body%></p>
+          <p><span class="label label-success">to</span><%=first_comment.retort%></p>
+        </div>
       </div>
       <div class="span6">
         <% if second_comment %>
-          <p><span class="label label-warning">from</span><%=second_comment.body%></p>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="row-fluid">
-      <div class="span6">
-        <p><span class="label label-success">to</span><%=first_comment.retort%></p>
-      </div>
-      <div class="span6">
-        <% if second_comment %>
-          <p><span class="label label-success">to</span><%=second_comment.retort%></p>
+          <div class="row-fluid">
+            <p><span class="label label-warning">from</span><%=second_comment.body%></p>
+            <p><span class="label label-success">to</span><%=second_comment.retort%></p>
+          </div>
         <% end %>
       </div>
     </div>
