@@ -15,7 +15,7 @@ class YourWrongBot
       processed_ids = Comment.where("comment_id in (?)", comment_ids).pluck(:comment_id)
 
       all_comments.each do |comment|
-        process_comment comment unless processed_ids.include? comment[:id]
+        process_comment comment unless processed_ids.include? comment[:id] || comment[:commented_on] < Time.zone.now.beginning_of_day
       end
     end
   end

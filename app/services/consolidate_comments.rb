@@ -10,7 +10,7 @@ class ConsolidateComments
 
   def self.build_comments_by_days(subreddit, comments, mistake)
     comments.each do |day, count|
-      subreddit.comments_by_days.build(day: day, total: count, mistake: mistake).save!
+      subreddit.comments_by_days.build(day: day, total: count, mistake: mistake).save
     end
   end
 

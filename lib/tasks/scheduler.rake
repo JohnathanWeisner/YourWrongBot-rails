@@ -2,7 +2,7 @@
 desc "This task is called by the Heroku scheduler add-on"
 task :scrape_comments => :environment do
   hour = Time.now.hour
-  if hour == 14 || hour == 22 || hour == 5 || hour == 20
+  if hour == 14 || hour == 23 || hour == 5 || hour == 19
     puts "Grabbing comments."
     YourWrongBot.run
     puts "Finished"
