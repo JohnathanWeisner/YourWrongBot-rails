@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704000553) do
+ActiveRecord::Schema.define(version: 20140729204458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,18 @@ ActiveRecord::Schema.define(version: 20140704000553) do
   add_index "comments", ["commented_on"], name: "index_comments_on_commented_on", using: :btree
   add_index "comments", ["reply_status"], name: "index_comments_on_reply_status", using: :btree
   add_index "comments", ["subreddit_id"], name: "index_comments_on_subreddit_id", using: :btree
+
+  create_table "comments_by_days", force: true do |t|
+    t.datetime "day"
+    t.integer  "total"
+    t.string   "mistake"
+    t.integer  "subreddit_id"
+  end
+
+  add_index "comments_by_days", ["day"], name: "index_comments_by_days_on_day", using: :btree
+  add_index "comments_by_days", ["mistake"], name: "index_comments_by_days_on_mistake", using: :btree
+  add_index "comments_by_days", ["subreddit_id"], name: "index_comments_by_days_on_subreddit_id", using: :btree
+  add_index "comments_by_days", ["total"], name: "index_comments_by_days_on_total", using: :btree
 
   create_table "grammar_mistakes", force: true do |t|
     t.string  "type"
