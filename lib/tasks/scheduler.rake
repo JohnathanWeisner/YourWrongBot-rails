@@ -1,9 +1,9 @@
 
 desc "This task is called by the Heroku scheduler add-on"
-task :scrape_comments, :start_now, :needs => :environment do |t, args|
+task :scrape_comments, [:start_now] => :environment do |t, args|
   start_now = args[:start_now] || false
   hour = Time.now.hour
-  
+
   if hour == 14 || hour == 23 || hour == 5 || hour == 19 || start_now
     puts "Grabbing comments."
     YourWrongBot.run
