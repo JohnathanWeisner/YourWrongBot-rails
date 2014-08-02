@@ -21,7 +21,7 @@ class YourWrongBot
   end
 
   def self.reply
-    comment = Comment.next_reply
+    comment = Comment.where(reply_status: "soon").first
     if comment
       init
       response = @client.comment(format_reply(comment.retort), "t1_#{comment.comment_id}")
