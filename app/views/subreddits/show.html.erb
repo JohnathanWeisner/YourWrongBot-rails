@@ -11,16 +11,20 @@ Total errors: <%=@comments.todays_errors.count%></p>
         <p><span class="success label">to</span><%=first_comment.retort%></p>
         </div>
       </div>
-      <div class="small-12 medium-4 column">
-        <p><span class="alert label">from</span><%=second_comment.body%></p>
-        <p><span class="success label">to</span><%=second_comment.retort%></p>
+      <% if second_comment %>
+        <div class="small-12 medium-4 column">
+          <p><span class="alert label">from</span><%=second_comment.body%></p>
+          <p><span class="success label">to</span><%=second_comment.retort%></p>
+          </div>
         </div>
-      </div>
-      <div class="small-12 medium-4 column">
-        <p><span class="alert label">from</span><%=third_comment.body%></p>
-        <p><span class="success label">to</span><%=third_comment.retort%></p>
+      <% end %>
+      <% if third_comment %>
+        <div class="small-12 medium-4 column">
+          <p><span class="alert label">from</span><%=third_comment.body%></p>
+          <p><span class="success label">to</span><%=third_comment.retort%></p>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   <% end %>
 <% end %>
