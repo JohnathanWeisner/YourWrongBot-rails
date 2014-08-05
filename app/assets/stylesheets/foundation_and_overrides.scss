@@ -1391,3 +1391,13 @@ $topbar-bg-color: rgba(0,0,0,0);
 .top-bar {
   background-color: rgba(0,0,0,0.5);
 }
+
+.top-bar-section {
+   li {
+      background: transparent !important; 
+   }
+}
+
+.top-bar-section ul li > a {
+  font-family: 'Arvo', serif;
+}

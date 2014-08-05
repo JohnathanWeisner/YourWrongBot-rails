@@ -4,21 +4,22 @@
 Total errors: <%=@comments.todays_errors.count%></p>
 <% if @comments %>
   <h5>Corrections done</h5>
-  <% @comments.todays_errors.each_slice(2) do |first_comment,second_comment| %>
-    <div class="row-fluid">
-      <div class="span6">
-        <div class="row-fluid">
-          <p><span class="label label-warning">from</span><%=first_comment.body%></p>
-          <p><span class="label label-success">to</span><%=first_comment.retort%></p>
+  <% @comments.todays_errors.each_slice(3) do |first_comment,second_comment, third_comment| %>
+    <div class="row text-center">
+      <div class="small-12 medium-4 column">
+        <p><span class="alert label">from</span><%=first_comment.body%></p>
+        <p><span class="success label">to</span><%=first_comment.retort%></p>
         </div>
       </div>
-      <div class="span6">
-        <% if second_comment %>
-          <div class="row-fluid">
-            <p><span class="label label-warning">from</span><%=second_comment.body%></p>
-            <p><span class="label label-success">to</span><%=second_comment.retort%></p>
-          </div>
-        <% end %>
+      <div class="small-12 medium-4 column">
+        <p><span class="alert label">from</span><%=second_comment.body%></p>
+        <p><span class="success label">to</span><%=second_comment.retort%></p>
+        </div>
+      </div>
+      <div class="small-12 medium-4 column">
+        <p><span class="alert label">from</span><%=third_comment.body%></p>
+        <p><span class="success label">to</span><%=third_comment.retort%></p>
+        </div>
       </div>
     </div>
   <% end %>
