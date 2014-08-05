@@ -1343,6 +1343,17 @@ $topbar-bg-color: rgba(0,0,0,0);
 
 
 @import 'foundation';
+
+.top-bar-section {
+   li {
+      background: transparent !important; 
+   }
+}
+
+.top-bar-section ul li > a {
+  font-family: 'Arvo', serif;
+}
+
 @media #{$small-only} { 
   #hero-text h3 {
     font-size: rem-calc(12);
