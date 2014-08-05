@@ -1,0 +1,42 @@
+
+
+#homepage-hero {
+  background: image-url("hero.jpg");
+  background-size: cover;
+  height: 440px;
+  text-align: left;
+  position: relative;
+  padding: 100px 20px 0 20px;
+}
+
+#hero-text {
+  margin-top: 30px;
+  background-color: rgba(0,0,0,0.5);
+}
+
+
+#hero-text h3 {
+  color: #fff;
+}
+
+#hero-text h4 {
+  color: rgba(13,235,255,0.4)
+}
+
+.oleo {
+  font-family: 'Oleo Script Swash Caps', 'script';
+}
+
+.homemade {
+  font-family: 'Homemade Apple', cursive;
+}
+
+.top-bar-section {
+   li {
+      background: transparent !important; 
+   }
+}
+
+.top-bar-section ul li > a {
+  font-family: 'Arvo', serif;
+}
